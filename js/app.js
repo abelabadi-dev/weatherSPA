@@ -23,7 +23,7 @@ weatherApp.controller('homeController',['$scope','cityService',function ($scope,
 }]);
 weatherApp.controller('forcastController',['$scope','$resource','$routeParams','cityService',
 	function ($scope,$resource,$routeParams,cityService) {
-		var cnt = $routeParams.days | 2;
+		var cnt = $routeParams.days || '2';
 		$scope.city = cityService.city;
 		$scope.weatherAPI = $resource('http://api.openweathermap.org/data/2.5/forecast/daily',
 			{callback:"JSON_CALLBACK"},
@@ -37,5 +37,16 @@ weatherApp.controller('forcastController',['$scope','$resource','$routeParams','
 weatherApp.filter('fahrenheit',function () {
 	return function (degk) {
 		return Math.round((1.8*(degk-273))+32) +' F';
+	}
+});
+
+weatherApp.directive('weatherReport',function () {
+	return{
+		restrict: 'E',
+		templateUrl:'../directive/weatherReport.html',
+		replace:true,
+		scope:{
+			weatherInfo:'=',
+		}
 	}
 });
