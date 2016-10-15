@@ -1,2 +1,2 @@
 # weatherSPA
-weather forcast by city
+weather forcast single page application with angularjs
